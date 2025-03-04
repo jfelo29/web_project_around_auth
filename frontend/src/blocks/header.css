@@ -34,6 +34,16 @@ box-shadow: none;
 
 
 }
+.header__mail {
+  font-family: Inter;
+font-weight: 500;
+font-size: 18px;
+line-height: 22px;
+letter-spacing: 0%;
+text-align: right;
+margin-right: 23px;
+}
+
 .header__button{
   font-family: Inter;
 font-weight: 400;

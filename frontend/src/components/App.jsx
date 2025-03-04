@@ -59,17 +59,12 @@ function App() {
       return;
 
     }
-    api.getUserInfo().then((data) => {
-      setCurrentUser(data);
-      setIsLoggedIn(true);
-      navigate('/');
-
+    api.getUserInfo().then((otraData) => {
       GetInfo().then((data) => {
-        setCurrentUser({ ...currentUser, email: data.data.email })
+        setIsLoggedIn(true);
+        setCurrentUser({ ...otraData, email: data.data.email })
+        navigate('/');
       })
-      //setCurrentUser((state) => ({ ...state, ...data.data }));
-
-      //navigate('/');
     })
 
 
