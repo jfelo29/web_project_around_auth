@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Register(props) { 
+export default function Register(props) {
   const { signup } = props;
   const [data, setData] = useState({});
-  
 
 
-const handleChange = (e) => {
 
-setData((prevData) => ({
-  ...prevData,
-  [e.target.name]: e.target.value,
-}));
-};
+  const handleChange = (e) => {
+
+    setData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
 
   function handleSubmit(event) {
@@ -56,6 +56,6 @@ setData((prevData) => ({
       </form>
 
     </div>
-    
+
   );
 }   

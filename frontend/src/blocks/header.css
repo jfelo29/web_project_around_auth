@@ -21,7 +21,32 @@
   font-family: Inter;
   font-size: 18px;
 }
+.headerbutton {
+  font-family: Inter;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+letter-spacing: 0%;
+text-align: right;
+color : #ffffff;
+text-decoration: none;
+box-shadow: none;
 
+
+}
+.header__button{
+  font-family: Inter;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+letter-spacing: 0%;
+text-align: right;
+background-color: black;
+color: #ffffff;
+text-shadow: none;
+border: none;
+
+}
 @media screen and (max-width: 880px) {
   .header {
     max-width: 580px;

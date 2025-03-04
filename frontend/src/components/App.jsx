@@ -20,7 +20,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [popup, setPopup] = useState(null);
   const [cards, setCard] = useState([]);
-  const [jwt, setJwt] = useState(localStorage.getItem('token'));
+  //const [jwt, setJwt] = useState();
+
   const navigate = useNavigate();
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,29 +50,35 @@ function App() {
       />
     ),
   };
-
   useEffect(() => {
+    const tokepPrueba = localStorage.getItem("jwt")
+    const jwt = getToken()
+    console.log(jwt)
 
-    if (!jwt) {
+    if (!tokepPrueba) {
       return;
 
     }
     api.getUserInfo().then((data) => {
       setCurrentUser(data);
       setIsLoggedIn(true);
+      navigate('/');
+
       GetInfo().then((data) => {
-        setCurrentUser((state) => ({ ...state, ...data.data }));
-
-        navigate('/');
+        setCurrentUser({ ...currentUser, email: data.data.email })
       })
+      //setCurrentUser((state) => ({ ...state, ...data.data }));
+
+      //navigate('/');
+    })
 
 
-    }).catch((err) => {
-      console.log(err);
-    });
+      .catch((err) => {
+        console.log(err);
+      });
     //getUserInfo();
 
-  }, [jwt, isLoggedIn]);
+  }, [isLoggedIn]);
   console.log(currentUser);
   /*function getUserInfo() {
     
@@ -95,7 +102,9 @@ function App() {
   function handleClosePopup() {
     setPopup(null);
   }
-
+  function handleCloseInfoTooltip() {
+    setIsInfoTooltip(false);
+  }
   async function handleUpdateUser(data) {
     await api.editUser(data).then((newData) => {
       setCurrentUser(newData);
@@ -116,24 +125,27 @@ function App() {
   }
   async function handleSignin(data) {
     signin(data).then((newData) => {
-      if (data.jwt) {
-        setToken(data.jwt);
+      if (newData.token) {
+        setToken(newData.token);
 
         setIsLoggedIn(true);
         setIsInfoTooltip(true);
         navigate('/');
-        setJwt(data.jwt);
 
 
-        const redirectPath = location.state?.from?.pathname || "/login";
-        navigate(redirectPath);
+        setIsRegistrationSuccess(true);
+      } else {
+        setIsInfoTooltip(true);
+        setIsRegistrationSuccess(false);
+
       }
-
-      handleClosePopup();
-      navigate('/');
     }).catch((err) => {
       setIsInfoTooltip(true);
+      setIsRegistrationSuccess(false);
     });
+
+
+
   }
 
   async function handleSignout() {
@@ -151,14 +163,18 @@ function App() {
       setCurrentUser(newData);
       handleClosePopup();
       navigate('/login');
+      setIsRegistrationSuccess(true);
     }).catch((err) => {
       console.log(err);
+      setIsRegistrationSuccess(false);
     });
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header handleSignout={handleSignout} />
+        <Header handleSignout={handleSignout}
+          email={currentUser.email} />
+
 
         <Routes>
           <Route path="/" element={
@@ -183,7 +199,7 @@ function App() {
 
         </Routes>
         {isInfoTooltip && <InfoTooltip isOpen={isInfoTooltip}
-          onclose={handleClosePopup}
+          onClose={handleCloseInfoTooltip}
           isSuccess={isRegistrationSuccess}>
         </InfoTooltip>}
 

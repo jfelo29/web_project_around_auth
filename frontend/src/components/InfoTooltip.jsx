@@ -1,6 +1,7 @@
 
 import Popup from "./Main/popup/Popup.jsx";
-
+import okimage from "../images/checkok.png";
+import negativeImage from "../images/negative-image.png";
 
 export function InfoTooltip({ isOpen, onClose, isSuccess }) {
 
@@ -9,27 +10,19 @@ export function InfoTooltip({ isOpen, onClose, isSuccess }) {
             isOpen={isOpen}
             onClose={onClose}
             name="infoTooltip"
-            title={
-                isSuccess
-                    ? "¡Correcto! Ya estás registrado."
-                    : "Uy, algo salió mal. Por favor, inténtalo de nuevo."
-            }
+
             showText={false}
             showButton={false}
         >
             {
                 isSuccess
                     ? (
-                        <img className="" src="" alt="" />
+                        <img className="image__tools " src={okimage} alt="check ok image" />
                     ) : (
-                        <img className="" src="" alt="" />
+                        <img className="image__tools " src={negativeImage} alt="no check image" />
                     )
             }
-            <h2 className="popup__title">
-                {isSuccess
-                    ? "¡Correcto! Ya estás registrado."
-                    : "Uy, algo salió mal. Por favor, inténtalo de nuevo."}
-            </h2>
+
             <p className="popup__text">
                 {isSuccess
                     ? "¡Correcto! Ya estás registrado."

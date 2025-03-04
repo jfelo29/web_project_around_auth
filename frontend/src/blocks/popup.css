@@ -22,7 +22,30 @@
   justify-content: space-around;
   background: white;
   position: relative;
-  position: relative;
+
+  width: 430px;
+height: 330px;
+
+
+  
+}
+.popup__text {
+  font-size: 18px;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Inter;
+font-weight: 900;
+font-size: 24px;
+line-height: 29.05px;
+letter-spacing: 0%;
+text-align: center;
+
+}
+.image__tools {
+  background-image: url("../images/Close_Icon.png");
+  width: 120px;
+  height: 120px;
 }
 
 .popup_opened {

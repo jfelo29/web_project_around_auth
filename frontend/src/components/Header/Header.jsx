@@ -8,7 +8,7 @@ export default function Header(props) {
   const currentUser = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(currentUser);
+  console.log(currentUser._id);
 
 
   return (
@@ -21,7 +21,10 @@ export default function Header(props) {
         </div>
         <div className="header__buttons">
           {currentUser?._id ? (
-            <button onClick={props.handleSignout}> signout </button>
+            <div>
+              < span className="header__mail">{props.email} </span>
+              <button className=" header__button" onClick={props.handleSignout}> cerrar sesión </button>
+            </div>
           ) : location.pathname === "/login" ? (
             <Link to="/register" className="headerbutton">
               Registrate
@@ -37,7 +40,7 @@ export default function Header(props) {
 
       </div>
 
-    </header>
+    </header >
   );
 }
 /*{currentUser.email}

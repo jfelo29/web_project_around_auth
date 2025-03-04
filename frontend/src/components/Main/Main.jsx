@@ -12,9 +12,9 @@ export default function Main(props) {
   useEffect(() => {
     api
       .getCards()
-
       .then((data) => {
         props.setCard(data);
+
       });
   }, []);
   async function handleCardLike(card) {

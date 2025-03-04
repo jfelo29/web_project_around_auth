@@ -1,4 +1,4 @@
-
+import { setToken, getToken } from './token';
 import { baseUrl } from './config';
 
 /*const autorize = (mail, pasword) => {
@@ -14,7 +14,8 @@ import { baseUrl } from './config';
 const GetInfo = async () => {
     const response = await fetch(`${baseUrl}/users/me`, {
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            //'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${getToken()}`,
         },
     });
     const data = await response.json();
@@ -47,13 +48,14 @@ const signin = async (userData) => {
         return { error: 'Invalid email or password' };
     }
     const data = await response.json();
-    localStorage.setItem('token', data.token); // Guarda el token en el almacenamiento local
+    setToken(data.token);
+    //localStorage.setItem('token', data.token); // Guarda el token en el almacenamiento local
     return data;
 };
 
 
 const fetchData = async (endpoint) => {
-    const token = localStorage.getItem('token');
+    const token = getToken();
     const response = await fetch(`${baseUrl}${endpoint}`, {
         headers: {
             'Authorization': `Bearer ${token}`,
